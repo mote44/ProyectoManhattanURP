@@ -286,9 +286,9 @@ GameObject:
   m_Component:
   - component: {fileID: 941359037}
   - component: {fileID: 941359036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemigo_Terrestre_0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
