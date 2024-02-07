@@ -9,7 +9,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Transform[] points; //Array de puntos de posición hacia los que la plataforma se moverá.
     [SerializeField] int startingPoint; //Número para determinar el índice del punto de inicio de la plataforma.
     [SerializeField] float speed; //Velocidad de la plataforma.
-
+    private float smoothTime = 0.5f;
+    Vector3 currentVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +33,8 @@ public class MovingPlatform : MonoBehaviour
 
         //Mueve la plataforma a la posición del punto guardado en el array...
         //... que corresponda al espacio del array con valor igual a la variable "i"
-        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
-
+        //transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, points[i].position, ref currentVelocity, smoothTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

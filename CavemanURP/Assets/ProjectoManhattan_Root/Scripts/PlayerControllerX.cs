@@ -20,6 +20,7 @@ public class PlayerControllerX : MonoBehaviour
     private Vector3 respawnPos;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isOnWall;
+    [SerializeField] bool isOnWater;
     [SerializeField] GameObject groundCheck;//Un objeto que detecta el suelo
     [SerializeField] GameObject wallCheck;
     [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
@@ -65,6 +66,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         canDash = true;
         playerGravityScale = playerRb.gravityScale;
+        
         
     }
 
@@ -145,10 +147,19 @@ public class PlayerControllerX : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded ) 
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded  ) 
         {
+            playerRb.mass = 1f;
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
             snowParticles.Play();
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isOnWater)
+        {
+            playerRb.mass = 1.5f;
+            playerRb.AddForce(Vector3.up * (jumpForce/1.5f), ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
+            
         }
 
         //Cancelación salto
@@ -232,6 +243,8 @@ public class PlayerControllerX : MonoBehaviour
 
         anim.SetInteger("Life",0);
         transform.position = respawnPos;
+        anim.SetInteger("Life", 3);
+        lifeCounter = 3;
 
     }
 
@@ -254,16 +267,41 @@ public class PlayerControllerX : MonoBehaviour
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
             lifeCounter = 3;
+            anim.SetInteger("Life", 3);
             anim.SetTrigger("Checkpoint");
             respawnPos = collision.transform.position;
+            
+            //anim.SetTrigger("Checkpoint");
+            
+        }
+
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            anim.SetInteger("Life", 1);
+            anim.SetTrigger("Hurt");
+            isOnWater = true;
+            lifeCounter = 1;
+            playerRb.gravityScale = 3;
+            speed = 9;
+            
+        }
 
 
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            isOnWater = false;
+            playerRb.gravityScale = 2;
+            speed = 18;
         }
     }
 
 
-
-        void OnDrawGizmos()
+    void OnDrawGizmos()
         {
         Gizmos.DrawCube(groundCheck.transform.position, groundCheckSize);
         Gizmos.DrawCube(wallCheck.transform.position, wallCheckSize);

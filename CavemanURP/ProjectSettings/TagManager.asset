@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Trampa
+  - Checkpoint
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -11,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - groundLayer
+  - Trampa
+  - Player
   - 
   - 
   - 
@@ -40,4 +43,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3789375699
+    locked: 0
+  - name: BackSide
+    uniqueID: 1365862579
+    locked: 0
+  - name: BackWaterfall
+    uniqueID: 2255957347
+    locked: 0
+  - name: Ground
+    uniqueID: 2264552139
+    locked: 0
+  - name: Water
+    uniqueID: 58189011
+    locked: 0
+  - name: Player
+    uniqueID: 819059051
+    locked: 0
+  - name: FrontWaterfall
+    uniqueID: 2238435427
+    locked: 0
+  - name: Foreground
+    uniqueID: 2921058789
+    locked: 0
+  - name: Trampa
+    uniqueID: 707071101
     locked: 0
