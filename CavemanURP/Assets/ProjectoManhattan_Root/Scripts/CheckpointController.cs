@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 public class CheckpointController : MonoBehaviour
 {
     
     Animator anim;
+    [SerializeField] Light2D checkpoinLight;
     
     [SerializeField] private Vector2 pointPos;
 
@@ -27,6 +29,7 @@ public class CheckpointController : MonoBehaviour
         {
             anim.SetBool("onFire", true);
             pointPos = this.transform.position;
+            checkpoinLight.enabled = true;
             
             
         }

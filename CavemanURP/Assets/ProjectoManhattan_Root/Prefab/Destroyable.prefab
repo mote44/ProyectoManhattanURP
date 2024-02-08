@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugador: {fileID: 0}
+  blueLight: {fileID: 6279677155805283397}
   playerSpeed: 0
   forwardImpact: 1
   speedToBreak: 9
@@ -324,8 +325,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.7648001, y: 0.23865008, z: 0}
-    m_Extent: {x: 1.7014, y: 2.53825, z: 0}
+    m_Center: {x: -0.7632, y: 0.23864996, z: 0}
+    m_Extent: {x: 1.7059, y: 2.5482502, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

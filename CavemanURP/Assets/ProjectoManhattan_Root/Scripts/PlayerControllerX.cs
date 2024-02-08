@@ -66,7 +66,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         canDash = true;
         playerGravityScale = playerRb.gravityScale;
-        
+        respawnPos = transform.position;
         
     }
 
@@ -114,6 +114,7 @@ public class PlayerControllerX : MonoBehaviour
         Movement(); // LAS FÍSICAS DEBERÍAN IR EN EL FIXED UPDATE
         Jump();
         Hit();
+        
 
         if (lifeCounter <= 0) { StartCoroutine(Death()); }
 
@@ -220,10 +221,16 @@ public class PlayerControllerX : MonoBehaviour
     private IEnumerator Death()
     {
         anim.SetInteger("Life", 0);
+        speed = 0f;
         yield return new WaitForSeconds(2);
+        anim.SetTrigger("Respawn");
         transform.position = respawnPos;
+        speed = 18f;
         lifeCounter = 3;
         anim.SetInteger("Life", 3);
+        
+        
+
     }
 
     private void Hit()
@@ -238,15 +245,7 @@ public class PlayerControllerX : MonoBehaviour
         
     }
 
-    private void Dead()
-    {
-
-        anim.SetInteger("Life",0);
-        transform.position = respawnPos;
-        anim.SetInteger("Life", 3);
-        lifeCounter = 3;
-
-    }
+   
 
     //Gestión del daño recibido
     private void OnCollisionEnter2D(Collision2D collision)
@@ -275,7 +274,7 @@ public class PlayerControllerX : MonoBehaviour
             
         }
 
-        if (collision.gameObject.CompareTag("Water"))
+        if (collision.gameObject.CompareTag("Water") && !isGrounded)
         {
             anim.SetInteger("Life", 1);
             anim.SetTrigger("Hurt");

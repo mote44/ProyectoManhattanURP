@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Destroyable : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Destroyable : MonoBehaviour
     Collider2D col;
     Animator animator;
     public GameObject jugador;
-    
+    [SerializeField] Light2D blueLight;
     public float playerSpeed;
 
     [Header("Break Direction")]
@@ -42,8 +43,8 @@ public class Destroyable : MonoBehaviour
                 col.enabled = false;
                 playerSpeed = playerSpeed * -1;
                 jugador.GetComponent<Rigidbody2D>().AddForce(Vector2.right*-2, ForceMode2D.Impulse); //Impulso hacia abajo
-                
 
+                blueLight.intensity = .1f;
 
 
             }
@@ -57,6 +58,7 @@ public class Destroyable : MonoBehaviour
                 Destroy(this.gameObject);
                 playerSpeed = playerSpeed * -1;
                 jugador.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 2, ForceMode2D.Impulse);
+                blueLight.intensity = .1f;
             }
         }
         
