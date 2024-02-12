@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DropFall : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D dropRb;
+    BoxCollider2D col;
+    [SerializeField]Light2D dropLight;
 
     [SerializeField] LayerMask groundLayers;
     [SerializeField] LayerMask playerLayer;
@@ -30,7 +33,7 @@ public class DropFall : MonoBehaviour
         groundCheckRadiuss = .25f;
         dropInitialGravity = dropRb.gravityScale;
         initialPos = transform.position;
-
+        col = GetComponent<BoxCollider2D>();
 
     }
 
@@ -39,6 +42,7 @@ public class DropFall : MonoBehaviour
         
         isGround = false;
         dropRb.bodyType = RigidbodyType2D.Static;
+        
         
         raycastPos1 = new Vector2(transform.position.x + 3f, transform.position.y);
         raycastPos2 = new Vector2(transform.position.x - 3f, transform.position.y);
@@ -78,11 +82,16 @@ public class DropFall : MonoBehaviour
     {
         animator.SetBool("Drop", false);
         animator.SetBool("Colision",true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
+        dropLight.intensity = 0;
+        col.enabled = false;
         dropRb.bodyType = RigidbodyType2D.Static;
         animator.SetBool("Colision", false);
         animator.SetBool("Drop", true);
         transform.position = initialPos;
+        col.enabled = true;
+        dropLight.intensity = 1;
+
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

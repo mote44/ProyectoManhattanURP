@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerControllerX : MonoBehaviour
 {
     //Variables de referencia
     Rigidbody2D playerRb;
     Animator anim;
+    [SerializeField] Light2D torch;
     [SerializeField] private ParticleSystem snowParticles;
     float horizontalInput;
 
@@ -19,11 +21,14 @@ public class PlayerControllerX : MonoBehaviour
     public int lifeCounter;
     private Vector3 respawnPos;
     [SerializeField] bool isGrounded;
+    [SerializeField] bool isOnPlatform;
     [SerializeField] bool isOnWall;
     [SerializeField] bool isOnWater;
     [SerializeField] GameObject groundCheck;//Un objeto que detecta el suelo
+    [SerializeField] GameObject platformCheck;
     [SerializeField] GameObject wallCheck;
     [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
+    [SerializeField] LayerMask platformLayer;
     //[SerializeField] float groundCheckRadius = 0.1f; //Define el radio de 
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] Vector2 wallCheckSize;
@@ -101,19 +106,26 @@ public class PlayerControllerX : MonoBehaviour
         }
 
 
-        isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, groundCheckSize,0f, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, groundCheckSize, 0f, groundLayer);
+        isOnPlatform = Physics2D.OverlapBox(platformCheck.transform.position, groundCheckSize, 0f, platformLayer);
+        
+        
+        //if (!isGrounded) { isOnPlatform = false; }
+        
+        
+        
         //isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, groundCheckRadius, groundLayer);   //Physics2D dibuja figuras geometricas invisibles
         //isGrounded va a ser verdadero     //Desde dónde?                   ,Radio?           , qué capa va a detectar? 
-
         isOnWall = Physics2D.OverlapBox(wallCheck.transform.position, wallCheckSize, 0f, groundLayer); ;  //Physics2D dibuja figuras geometricas invisibles
-
-        anim.SetBool("Jump", !isGrounded);
-        anim.SetBool("Run", isGrounded && horizontalInput!=0);
+        
+        anim.SetBool("Jump", (!isGrounded && !isOnPlatform));
+        anim.SetBool("Run", (isGrounded || isOnPlatform) && horizontalInput!=0);
         anim.SetInteger("Life", lifeCounter);
 
         Movement(); // LAS FÍSICAS DEBERÍAN IR EN EL FIXED UPDATE
         Jump();
         Hit();
+        AirHit();
         
 
         if (lifeCounter <= 0) { StartCoroutine(Death()); }
@@ -148,11 +160,11 @@ public class PlayerControllerX : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded  ) 
+        if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || isOnPlatform)) 
         {
             playerRb.mass = 1f;
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
-            snowParticles.Play();
+            if(!isOnPlatform)snowParticles.Play();
 
         }
 
@@ -222,10 +234,10 @@ public class PlayerControllerX : MonoBehaviour
     {
         anim.SetInteger("Life", 0);
         speed = 0f;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.63f);
         anim.SetTrigger("Respawn");
-        transform.position = respawnPos;
         speed = 18f;
+        transform.position = respawnPos;
         lifeCounter = 3;
         anim.SetInteger("Life", 3);
         
@@ -245,7 +257,15 @@ public class PlayerControllerX : MonoBehaviour
         
     }
 
-   
+    private void AirHit()
+    {
+        if (!isGrounded && !isOnPlatform && Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            playerRb.AddForce(-Vector3.up * (jumpForce*5), ForceMode2D.Impulse);
+            anim.SetTrigger("Hit");
+            Debug.Log("Air Hit");
+        }
+    }
 
     //Gestión del daño recibido
     private void OnCollisionEnter2D(Collision2D collision)
@@ -256,6 +276,7 @@ public class PlayerControllerX : MonoBehaviour
             anim.SetTrigger("Hurt");
             lifeCounter = lifeCounter - 1;
             Debug.Log(lifeCounter);
+            torch.intensity = lifeCounter-1;
             
 
         }
@@ -269,25 +290,26 @@ public class PlayerControllerX : MonoBehaviour
             anim.SetInteger("Life", 3);
             anim.SetTrigger("Checkpoint");
             respawnPos = collision.transform.position;
-            
+            torch.intensity = lifeCounter - 1;
+
             //anim.SetTrigger("Checkpoint");
-            
+
         }
 
-        if (collision.gameObject.CompareTag("Water") && !isGrounded)
+        if (collision.gameObject.CompareTag("Water") && !isOnPlatform)
         {
             anim.SetInteger("Life", 1);
             anim.SetTrigger("Hurt");
             isOnWater = true;
             lifeCounter = 1;
-            playerRb.gravityScale = 3;
+            playerRb.gravityScale = .2f;
             speed = 9;
-            
+            torch.intensity = lifeCounter - 1;
+            //multiplicadorSalto = 0.05f;
+            jumpForce = 10;
         }
 
-
-
-    }
+    }   
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -296,6 +318,8 @@ public class PlayerControllerX : MonoBehaviour
             isOnWater = false;
             playerRb.gravityScale = 2;
             speed = 18;
+            //multiplicadorSalto = 0.1f;
+            jumpForce = 12;
         }
     }
 

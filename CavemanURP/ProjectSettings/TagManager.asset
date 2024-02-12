@@ -7,6 +7,7 @@ TagManager:
   - Trampa
   - Checkpoint
   - Water
+  - PlatformResetCol
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - groundLayer
   - Trampa
   - Player
-  - 
+  - platformNoSnow
   - 
   - 
   - 
@@ -53,14 +54,20 @@ TagManager:
   - name: BackWaterfall
     uniqueID: 2255957347
     locked: 0
-  - name: Ground
-    uniqueID: 2264552139
-    locked: 0
   - name: Water
     uniqueID: 58189011
     locked: 0
+  - name: WaterPlatform
+    uniqueID: 2304457059
+    locked: 0
+  - name: Ground
+    uniqueID: 2264552139
+    locked: 0
   - name: Player
     uniqueID: 819059051
+    locked: 0
+  - name: GroundOver
+    uniqueID: 1505750737
     locked: 0
   - name: FrontWaterfall
     uniqueID: 2238435427
