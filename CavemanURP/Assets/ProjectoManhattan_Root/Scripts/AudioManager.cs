@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     //Declaración de Singletone
     public static AudioManager Instance;
 
-    [Header("uidio Source References")]
+    [Header("Audio Source References")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSource;
 

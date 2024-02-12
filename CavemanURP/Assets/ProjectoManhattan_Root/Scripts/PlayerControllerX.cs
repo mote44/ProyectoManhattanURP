@@ -61,7 +61,7 @@ public class PlayerControllerX : MonoBehaviour
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.75f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
-
+        //AudioManager.Instance.PlaySFX(0);     //Lanzar audios
 
 
 
