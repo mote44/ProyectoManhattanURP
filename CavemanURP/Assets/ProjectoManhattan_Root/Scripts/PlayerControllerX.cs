@@ -27,11 +27,21 @@ public class PlayerControllerX : MonoBehaviour
     [SerializeField] GameObject groundCheck;//Un objeto que detecta el suelo
     [SerializeField] GameObject platformCheck;
     [SerializeField] GameObject wallCheck;
-    [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
-    [SerializeField] LayerMask platformLayer;
-    //[SerializeField] float groundCheckRadius = 0.1f; //Define el radio de 
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] Vector2 wallCheckSize;
+
+    [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
+    [SerializeField] LayerMask platformLayer;
+    
+    
+   
+
+    [Header("Hit")]
+    [SerializeField] Transform hitCheck;
+    [SerializeField] private float hitCheckRadius = 1f; //Define el radio de 
+    [SerializeField] private float hitDamage;
+    [SerializeField] private bool isHitting;
+    private Vector2 torchInitPos;
 
     [Header("Dash")]
     [SerializeField] private bool canDash;
@@ -59,8 +69,9 @@ public class PlayerControllerX : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
-        groundCheckSize = new Vector2(.75f, .04f);
+        groundCheckSize = new Vector2(.8f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
+        
         //AudioManager.Instance.PlaySFX(0);     //Lanzar audios
 
 
@@ -94,6 +105,8 @@ public class PlayerControllerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        torchInitPos = new Vector2(transform.position.x - .5f,transform.position.y + 1.1f);
+
         if (isDashing)
         {
             return;
@@ -105,14 +118,10 @@ public class PlayerControllerX : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, groundCheckSize, 0f, groundLayer);
         isOnPlatform = Physics2D.OverlapBox(platformCheck.transform.position, groundCheckSize, 0f, platformLayer);
         
-        
         //if (!isGrounded) { isOnPlatform = false; }
-        
-        
         
         //isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, groundCheckRadius, groundLayer);   //Physics2D dibuja figuras geometricas invisibles
         //isGrounded va a ser verdadero     //Desde dónde?                   ,Radio?           , qué capa va a detectar? 
@@ -240,9 +249,14 @@ public class PlayerControllerX : MonoBehaviour
         transform.position = respawnPos;
         lifeCounter = 3;
         anim.SetInteger("Life", 3);
-        
-        
+    }
 
+    private IEnumerator LightHitPos()
+    {
+        torch.transform.position = hitCheck.transform.position;
+        anim.SetTrigger("Hit");
+        yield return new WaitForSeconds(0.63f);
+        torch.transform.position = torchInitPos;
     }
 
     private void Hit()
@@ -250,19 +264,30 @@ public class PlayerControllerX : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            
-            //playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir
-            anim.SetTrigger("Hit");
+            //Lista de objetos en contacto -> en contacto con este círculo
+            Collider2D[] objectsInContact = Physics2D.OverlapCircleAll(hitCheck.transform.position, hitCheckRadius);
+
+            foreach (Collider2D col in objectsInContact) //Pasamos por todos los objetos en contacto
+            {
+                if (col.CompareTag("Enemy"))
+                {
+                    col.transform.GetComponent<Enemy>().DamageReceive(hitDamage);
+                }
+            }
+
+             StartCoroutine(LightHitPos());
+
         }
         
     }
 
     private void AirHit()
     {
-        if (!isGrounded && !isOnPlatform && Input.GetKeyDown(KeyCode.LeftControl))
+        if (!isGrounded && !isOnPlatform && Input.GetKey(KeyCode.DownArrow) && Input.GetKeyDown(KeyCode.LeftControl))
         {
+            //anim.SetTrigger("Hit");
             playerRb.AddForce(-Vector3.up * (jumpForce*5), ForceMode2D.Impulse);
-            anim.SetTrigger("Hit");
+            Hit();
             Debug.Log("Air Hit");
         }
     }
@@ -277,9 +302,8 @@ public class PlayerControllerX : MonoBehaviour
             lifeCounter = lifeCounter - 1;
             Debug.Log(lifeCounter);
             torch.intensity = lifeCounter-1;
-            
-
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -328,5 +352,6 @@ public class PlayerControllerX : MonoBehaviour
         {
         Gizmos.DrawCube(groundCheck.transform.position, groundCheckSize);
         Gizmos.DrawCube(wallCheck.transform.position, wallCheckSize);
+        Gizmos.DrawWireSphere(hitCheck.transform.position,hitCheckRadius);
         }
     }
