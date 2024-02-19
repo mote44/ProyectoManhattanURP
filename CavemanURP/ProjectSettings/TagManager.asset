@@ -9,6 +9,8 @@ TagManager:
   - Water
   - PlatformResetCol
   - Enemy
+  - EndOfIce
+  - Pickup
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Trampa
   - Player
   - platformNoSnow
-  - 
+  - EndOfIce
   - 
   - 
   - 

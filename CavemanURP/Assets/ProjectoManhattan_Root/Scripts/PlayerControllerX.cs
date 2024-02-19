@@ -288,7 +288,7 @@ public class PlayerControllerX : MonoBehaviour
             //anim.SetTrigger("Hit");
             playerRb.AddForce(-Vector3.up * (jumpForce*5), ForceMode2D.Impulse);
             Hit();
-            Debug.Log("Air Hit");
+            //Debug.Log("Air Hit");
         }
     }
 
@@ -302,6 +302,11 @@ public class PlayerControllerX : MonoBehaviour
             lifeCounter = lifeCounter - 1;
             Debug.Log(lifeCounter);
             torch.intensity = lifeCounter-1;
+        }
+
+        if (collision.gameObject.CompareTag("Pickup"))
+        {
+            GameManager.Instance.Pickup();
         }
 
     }
@@ -333,6 +338,8 @@ public class PlayerControllerX : MonoBehaviour
             jumpForce = 10;
         }
 
+       
+            
     }   
 
     private void OnTriggerExit2D(Collider2D collision)

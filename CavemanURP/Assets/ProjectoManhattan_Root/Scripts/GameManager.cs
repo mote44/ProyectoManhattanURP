@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public int points;
     public int winPoints;
     public int lifePoints;
+    public int pickupPoints;
 
     private void Awake()
     {
@@ -57,4 +58,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Pickup()
+    {
+        pickupPoints +=1;
+        Debug.Log("pickups " + pickupPoints);
+    }
 }
