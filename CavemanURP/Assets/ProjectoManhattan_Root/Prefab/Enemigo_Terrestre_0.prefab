@@ -122,6 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337971f0813d5ab40a398b7947b95663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  points:
+  - {fileID: 0}
+  - {fileID: 0}
+  startingPoint: 0
+  speed: 3
   enemyLife: 1
   isGrounded: 0
   groundCheck: {fileID: 4964844823705052018}
