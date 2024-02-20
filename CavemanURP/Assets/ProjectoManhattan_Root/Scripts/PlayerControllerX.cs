@@ -176,6 +176,7 @@ public class PlayerControllerX : MonoBehaviour
             playerRb.mass = 1f;
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
             if(!isOnPlatform)snowParticles.Play();
+            AudioManager.Instance.PlaySFX(1);
 
         }
 
@@ -192,8 +193,8 @@ public class PlayerControllerX : MonoBehaviour
             JumpKeyUp();                    //Ejecuta 
         }
 
-       
         
+
     }
 
     private void JumpKeyUp()
@@ -230,6 +231,7 @@ public class PlayerControllerX : MonoBehaviour
         float originalGravity = playerRb.gravityScale;
         playerRb.gravityScale = 0.5f;
         playerRb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        AudioManager.Instance.PlaySFX(3);
         //tr.emitting = true;
         trailObject.GetComponent<TrailRenderer>().emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -288,7 +290,8 @@ public class PlayerControllerX : MonoBehaviour
                 }
             }
 
-             StartCoroutine(LightHitPos());
+            AudioManager.Instance.PlaySFX(2);
+            StartCoroutine(LightHitPos());
 
         }
         

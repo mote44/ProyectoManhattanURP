@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class CheckpointController : MonoBehaviour
 {
-    
+    AudioSource audioS;
     Animator anim;
     [SerializeField] Light2D checkpoinLight;
     
@@ -18,6 +18,7 @@ public class CheckpointController : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        audioS = GetComponent<AudioSource>();
        
     }
 
@@ -30,8 +31,9 @@ public class CheckpointController : MonoBehaviour
             anim.SetBool("onFire", true);
             pointPos = this.transform.position;
             checkpoinLight.enabled = true;
+            audioS.Play();
             
-            
+
         }
     }
 }

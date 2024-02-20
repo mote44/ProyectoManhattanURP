@@ -516,8 +516,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1407651427}
   sfxSource: {fileID: 645954262}
-  musicList: []
-  sfxList: []
+  musicList:
+  - {fileID: 8300000, guid: 22248cbcb3bbb574d812f37290b889a1, type: 3}
+  sfxList:
+  - {fileID: 8300000, guid: 47fb3dbbbdd91e9489d43621da8c1c49, type: 3}
+  - {fileID: 8300000, guid: bfab7ac3ee1e24b4dad2932714b14606, type: 3}
+  - {fileID: 8300000, guid: a611811267f244c42957630fdfa4cd73, type: 3}
+  - {fileID: 8300000, guid: 2577a70eab0fded46a6730676a7cfc4b, type: 3}
+  - {fileID: 8300000, guid: 336415b1a68926046937c24ff8db0dcc, type: 3}
+  - {fileID: 8300000, guid: 1a0b9700c2b549142987af8380a0b971, type: 3}
+  - {fileID: 8300000, guid: 30f988be7bb1bd44ebbe72efc0fbfef1, type: 3}
+  - {fileID: 8300000, guid: 4bc5c1276d73a5d43a61f1c4915c1e34, type: 3}
 --- !u!1 &396019711
 GameObject:
   m_ObjectHideFlags: 0

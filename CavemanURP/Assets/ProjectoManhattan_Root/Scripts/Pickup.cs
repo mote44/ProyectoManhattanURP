@@ -22,6 +22,7 @@ public class Pickup : MonoBehaviour
         {
             //Destroy(this);
             this.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(7);
             Debug.Log("Destroyed");
         }
     }
