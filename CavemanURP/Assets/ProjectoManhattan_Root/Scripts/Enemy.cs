@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int i; //indice del array de puntos para que la plataforma detecte un punto a seguir.
+    private int i; //indice del array de puntos para que el enemigo detecte un punto a seguir.
     [Header("Point & Movement Configuration")]
     [SerializeField] Transform[] points; //Array de puntos de posición hacia los que el enemigo se moverá.
     [SerializeField] int startingPoint; //Número mpara determinar el punto de inicio del enemigo.
@@ -25,12 +25,12 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       transform.position = points[startingPoint].position;
+        transform.position = points[startingPoint].position;
 
-       enemyAnim = GetComponent<Animator>();
-       enemyRb = GetComponent<Rigidbody2D>();
-       groundCheck = GameObject.Find("EnemyGroundCheck");//Encuentra el object que hemos creado como hijo de Player
-       groundCheckSize = new Vector2(.8f, .04f);
+        enemyAnim = GetComponent<Animator>();
+        enemyRb = GetComponent<Rigidbody2D>();
+        groundCheck = GameObject.Find("EnemyGroundCheck");//Encuentra el object que hemos creado como hijo de Player
+        groundCheckSize = new Vector2(.8f, .04f);
     }
 
     // Update is called once per frame
@@ -38,13 +38,13 @@ public class Enemy : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, groundCheckSize, 0f, groundLayer);
 
-        
+
 
         if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
         {
             transform.localScale = new Vector3(1, 1, 1);
             enemyAnim.SetBool("Walk", true);
-            i++; //Aumewnte el indice, cambia de objetivo hacia el que moverse.
+            i++; //Aumenta el indice, cambia de objetivo hacia el que moverse.
             if (i == points.Length) //Chequea si el enemigo ha llegado al ultimo punto del array.
             {
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -58,6 +58,14 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            enemyAnim.SetTrigger("Attack");
+        }
+    }
+
     public void DamageReceive(float damage)
     {
         enemyLife -= damage;
@@ -67,6 +75,8 @@ public class Enemy : MonoBehaviour
 
     private void EnemyDeath()
     {
-        
+        enemyAnim.SetTrigger("Death");
+
     }
+
 }

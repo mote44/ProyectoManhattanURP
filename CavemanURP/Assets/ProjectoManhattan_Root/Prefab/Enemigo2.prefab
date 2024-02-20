@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5897225554640513694}
   - component: {fileID: 5466337372474271642}
   - component: {fileID: 7895622999942248077}
+  - component: {fileID: 9062162805380430571}
   m_Layer: 0
   m_Name: Enemigo2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5897225554640513694
 SpriteRenderer:
@@ -139,6 +140,23 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11421692, y: 0.114216805}
+  m_Offset: {x: -0.23112252, y: 0.017941505}
   serializedVersion: 2
-  m_Radius: 0.65734947
+  m_Radius: 0.4166613
+--- !u!114 &9062162805380430571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520755433260330974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59faa3d458cd434f9e5dbffcf362c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdLife: 1
+  playerTransform: {fileID: 1525906458238816608, guid: 0abf8db111c2d164ba91358728c29931, type: 3}
+  speed: 3
+  isChaseing: 0
+  chaseDistance: 4
