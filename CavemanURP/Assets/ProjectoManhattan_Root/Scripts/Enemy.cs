@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D enemyRb;
     private Animator enemyAnim;
+    
 
 
     [SerializeField] bool isGrounded;
@@ -83,8 +84,6 @@ public class Enemy : MonoBehaviour
     private void EnemyDeath()
     {
         enemyAnim.SetTrigger("Death");
-        
-        
     }
 
 }
