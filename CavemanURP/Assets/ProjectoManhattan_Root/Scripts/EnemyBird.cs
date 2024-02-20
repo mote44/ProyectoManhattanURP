@@ -9,6 +9,7 @@ public class EnemyBird : MonoBehaviour
 
     Rigidbody2D birdRb;
     private Animator birdAnim;
+    [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
 
     [Header("Chase")]
     float horizontalMovement;
@@ -16,6 +17,8 @@ public class EnemyBird : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] bool isChasing;
     [SerializeField] float chaseDistance;
+    bool isFacingLeft;
+    
 
 
 
@@ -45,14 +48,14 @@ public class EnemyBird : MonoBehaviour
         //condiciones para flipear el personaje segun movimiento
 
 
-        //if (isChasing && )
-        // {
-        // transform.localScale = new Vector3(1, 1, 1);
-        // }
-        // if (isChasing && )
-        // {
-        // transform.localScale = new Vector3(-1, 1, 1);
-        // }
+        if (isChasing && playerTransform.position.x - transform.position.x < 0)
+         {
+         transform.localScale = new Vector3(1, 1, 1);
+         }
+         if (isChasing && playerTransform.position.x - transform.position.x > 0)
+         {
+         transform.localScale = new Vector3(-1, 1, 1);
+         }
     }
 
 
