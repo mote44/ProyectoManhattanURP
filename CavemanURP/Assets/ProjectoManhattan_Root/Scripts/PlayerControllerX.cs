@@ -42,6 +42,7 @@ public class PlayerControllerX : MonoBehaviour
     [SerializeField] private float hitDamage;
     [SerializeField] private bool isHitting;
     private Vector2 torchInitPos;
+    [SerializeField] private int damageReceived;
 
     [Header("Dash")]
     [SerializeField] private bool canDash;
@@ -71,6 +72,7 @@ public class PlayerControllerX : MonoBehaviour
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.8f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
+        damageReceived = 1;
         
         //AudioManager.Instance.PlaySFX(0);     //Lanzar audios
 
@@ -249,6 +251,17 @@ public class PlayerControllerX : MonoBehaviour
         transform.position = respawnPos;
         lifeCounter = 3;
         anim.SetInteger("Life", 3);
+        torch.intensity = 0f;
+    }
+
+
+    private IEnumerator Intocable()
+    {
+        damageReceived = 0;
+        isOnPlatform = true;
+        yield return new WaitForSeconds(3f);
+        damageReceived = 1;
+
     }
 
     private IEnumerator LightHitPos()
@@ -295,24 +308,38 @@ public class PlayerControllerX : MonoBehaviour
     //Gestión del daño recibido
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Trampa"))
-        {
-            
-            anim.SetTrigger("Hurt");
-            lifeCounter = lifeCounter - 1;
-            Debug.Log(lifeCounter);
-            torch.intensity = lifeCounter-1;
-        }
+       
 
         if (collision.gameObject.CompareTag("Pickup"))
         {
             GameManager.Instance.Pickup();
         }
 
+        if (collision.gameObject.CompareTag("Trampa"))
+        {
+
+            anim.SetTrigger("Hurt");
+            lifeCounter = lifeCounter - damageReceived;
+            Debug.Log(lifeCounter);
+            torch.intensity = lifeCounter - damageReceived;
+            StartCoroutine(Intocable());
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Trampa"))
+        {
+
+            anim.SetTrigger("Hurt");
+            lifeCounter = lifeCounter - damageReceived;
+            Debug.Log(lifeCounter);
+            torch.intensity = lifeCounter - damageReceived;
+            StartCoroutine(Intocable());
+
+        }
+
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
             lifeCounter = 3;
