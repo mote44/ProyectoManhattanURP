@@ -38,32 +38,39 @@ public class Enemy : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, groundCheckSize, 0f, groundLayer);
 
-
-
-        if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
+        if (enemyLife > 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
-            enemyAnim.SetBool("Walk", true);
-            i++; //Aumenta el indice, cambia de objetivo hacia el que moverse.
-            if (i == points.Length) //Chequea si el enemigo ha llegado al ultimo punto del array.
+            if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
-                i = 0;//Resetea el índice para volver a empezar, el enemigo va hacia el punto 0.
+                transform.localScale = new Vector3(1, 1, 1);
+                enemyAnim.SetBool("Walk", true);
+                i++; //Aumenta el indice, cambia de objetivo hacia el que moverse.
+                if (i == points.Length) //Chequea si el enemigo ha llegado al ultimo punto del array.
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                    i = 0;//Resetea el índice para volver a empezar, el enemigo va hacia el punto 0.
+                }
             }
+
+
+            //Mueve el enemigo a la posición del punto guardado en el array...
+            //... que corresponda al espacio del array con valor igual a la variable "i"
+            transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
         }
 
-
-        //Mueve el enemigo a la posición del punto guardado en el array...
-        //... que corresponda al espacio del array con valor igual a la variable "i"
-        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+       
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(UnityEngine.Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (enemyLife > 0)
         {
-            enemyAnim.SetTrigger("Attack");
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                enemyAnim.SetTrigger("Attack");
+            }
         }
+            
     }
 
     public void DamageReceive(float damage)
@@ -76,7 +83,8 @@ public class Enemy : MonoBehaviour
     private void EnemyDeath()
     {
         enemyAnim.SetTrigger("Death");
-
+        
+        
     }
 
 }
