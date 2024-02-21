@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UILevel : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class UILevel : MonoBehaviour
 
         if (totalLifes <= 0)
         {
-            gameOverPanel.SetActive(true);
+            StartCoroutine(BackToMenu());
         }
 
         DesactivarVida();
@@ -47,6 +48,11 @@ public class UILevel : MonoBehaviour
         vidas[GameManager.Instance.superLifes].gameObject.SetActive(false);
     }
 
-    
 
+    private IEnumerator BackToMenu()
+    {
+        gameOverPanel.SetActive(true);
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(0);
+    }
 }

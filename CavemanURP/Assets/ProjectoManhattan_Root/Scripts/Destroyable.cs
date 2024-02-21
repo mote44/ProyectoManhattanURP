@@ -43,9 +43,8 @@ public class Destroyable : MonoBehaviour
                 col.enabled = false;
                 playerSpeed = playerSpeed * -1;
                 jugador.GetComponent<Rigidbody2D>().AddForce(Vector2.right*-2, ForceMode2D.Impulse); //Impulso hacia abajo
-
                 blueLight.intensity = .1f;
-
+                AudioManager.Instance.PlaySFX(11);
 
             }
         }

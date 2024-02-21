@@ -397,7 +397,7 @@ public class PlayerControllerX : MonoBehaviour
 
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("EnemyHit"))
         {
 
             Hurt();
