@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerControllerX : MonoBehaviour
 {
     //Variables de referencia
+    
     Rigidbody2D playerRb;
     Animator anim;
     [SerializeField] Light2D torch;
@@ -17,6 +19,7 @@ public class PlayerControllerX : MonoBehaviour
     public float jumpForce;
     public float dashForce;
     bool isFacingRight = true;
+    
 
     public int lifeCounter;
     public int superLifeCounter;
@@ -71,6 +74,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.78f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
@@ -180,6 +184,7 @@ public class PlayerControllerX : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal"); // Rellenamos la variable del input horizontal
         playerRb.velocity = new Vector2(horizontalInput * speed / playerRb.gravityScale, playerRb.velocity.y); //El valor Y representa el valor que tenga la posY del player en cada momento, no queremos modificarla
         
+       
     }
 
     void Jump()
@@ -190,6 +195,7 @@ public class PlayerControllerX : MonoBehaviour
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
             if(!isOnPlatform)snowParticles.Play();
             AudioManager.Instance.PlaySFX(1);
+            AudioManager.Instance.PlaySFX(9);
 
         }
 
@@ -245,6 +251,7 @@ public class PlayerControllerX : MonoBehaviour
         playerRb.gravityScale = 0.5f;
         playerRb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         AudioManager.Instance.PlaySFX(3);
+        AudioManager.Instance.PlaySFX(10);
         //tr.emitting = true;
         trailObject.GetComponent<TrailRenderer>().emitting = true;
         yield return new WaitForSeconds(dashingTime);
@@ -353,7 +360,8 @@ public class PlayerControllerX : MonoBehaviour
     private void Hurt()
     {
         anim.SetTrigger("Hurt");
-        
+        AudioManager.Instance.PlaySFX(8);
+
     }
 
     //Gestión del daño recibido
@@ -380,7 +388,7 @@ public class PlayerControllerX : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
 
-            anim.SetTrigger("Hurt");
+            Hurt();
             lifeCounter = lifeCounter - damageReceived;
             Debug.Log(lifeCounter);
             torch.intensity = lifeCounter - damageReceived;
@@ -394,7 +402,7 @@ public class PlayerControllerX : MonoBehaviour
         if (collision.gameObject.CompareTag("Trampa"))
         {
 
-            anim.SetTrigger("Hurt");
+            Hurt();
             lifeCounter = lifeCounter - damageReceived;
             Debug.Log(lifeCounter);
             torch.intensity = lifeCounter - damageReceived;
@@ -417,7 +425,7 @@ public class PlayerControllerX : MonoBehaviour
         if (collision.gameObject.CompareTag("Water") && !isOnPlatform)
         {
             anim.SetInteger("Life", 1);
-            anim.SetTrigger("Hurt");
+            Hurt();
             isOnWater = true;
             lifeCounter = 1;
             playerRb.gravityScale = .2f;

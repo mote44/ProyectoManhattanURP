@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
 
     [SerializeField] bool isGrounded;
-    [SerializeField] GameObject groundCheck;//Un objeto que detecta el suelo
+    [SerializeField] GameObject groundCheck;
     [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
     [SerializeField] Vector2 groundCheckSize;
 
@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         enemyRb = GetComponent<Rigidbody2D>();
         groundCheck = GameObject.Find("EnemyGroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.8f, .04f);
+
     }
 
     // Update is called once per frame
