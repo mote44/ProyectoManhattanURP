@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9062162805380430571}
   m_Layer: 0
   m_Name: Enemigo2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 32793971205387442}
   m_Layer: 0
   m_Name: BirdHit
-  m_TagString: Enemy
+  m_TagString: EnemyHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.010049999, y: 0.11344999, z: 0}
-    m_Extent: {x: 0.47565, y: 0.43825, z: 0}
+    m_Center: {x: -0.0059999973, y: 0.10554999, z: 0}
+    m_Extent: {x: 0.4651, y: 0.43965, z: 0}
   m_PointLightInnerAngle: 65.41
   m_PointLightOuterAngle: 100.55
   m_PointLightInnerRadius: 0.23937695
