@@ -759,8 +759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98121a17eb0c58346aa79b29711e2b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsText: {fileID: 0}
-  winPanel: {fileID: 0}
+  pointsText: {fileID: 7061705244501662262}
+  winPanel: {fileID: 2228577959531566396}
   gameOverPanel: {fileID: 7487289305370877789}
   vidas:
   - {fileID: 7713995849475914482}
