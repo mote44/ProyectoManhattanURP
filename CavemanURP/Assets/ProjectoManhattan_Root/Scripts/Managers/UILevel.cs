@@ -36,6 +36,7 @@ public class UILevel : MonoBehaviour
 
         if (totalLifes <= 0)
         {
+            
             StartCoroutine(BackToMenu());
         }
 
@@ -52,6 +53,7 @@ public class UILevel : MonoBehaviour
     private IEnumerator BackToMenu()
     {
         gameOverPanel.SetActive(true);
+        AudioManager.Instance.PlaySFX(13);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(0);
     }

@@ -865,8 +865,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.13780022, y: -5.08075, z: 0}
-    m_Extent: {x: 15.0738, y: 5.54155, z: 0}
+    m_Center: {x: 0.13665009, y: -5.0751996, z: 0}
+    m_Extent: {x: 15.07045, y: 5.5467, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1025,6 +1025,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22248cbcb3bbb574d812f37290b889a1, type: 3}
   - {fileID: 8300000, guid: 47fb3dbbbdd91e9489d43621da8c1c49, type: 3}
   - {fileID: 8300000, guid: 717d368c5fb80e749afc7c6775795b81, type: 3}
+  - {fileID: 8300000, guid: 99a7f55eecf0e6e4686a365972020c6d, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 2306731dfa94e784cb6b11cf05fd1e86, type: 3}
   - {fileID: 8300000, guid: bfab7ac3ee1e24b4dad2932714b14606, type: 3}
@@ -1038,6 +1039,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 665f8c3ad8466fb48949572d3a1b36ea, type: 3}
   - {fileID: 8300000, guid: 448baaaa34ac1c14b8b708abbf02dfe1, type: 3}
   - {fileID: 8300000, guid: 582d75331e8db3e458a7f8beebdcdeb9, type: 3}
+  - {fileID: 8300000, guid: 164be978e9a1c0e478addfbef6844ee3, type: 3}
+  - {fileID: 8300000, guid: 04871f1f736a59048bfdac59ded4270b, type: 3}
 --- !u!1 &396019711
 GameObject:
   m_ObjectHideFlags: 0

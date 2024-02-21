@@ -436,6 +436,8 @@ public class PlayerControllerX : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Water") && !isOnPlatform)
         {
+            AudioManager.Instance.PlaySFX(12);
+            AudioManager.Instance.PlayMusic(3);
             anim.SetInteger("Life", 1);
             Hurt();
             isOnWater = true;
@@ -455,6 +457,8 @@ public class PlayerControllerX : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Water"))
         {
+            AudioManager.Instance.PlaySFX(12);
+            AudioManager.Instance.PauseMusic(3);
             isOnWater = false;
             playerRb.gravityScale = 2;
             speed = 18;
