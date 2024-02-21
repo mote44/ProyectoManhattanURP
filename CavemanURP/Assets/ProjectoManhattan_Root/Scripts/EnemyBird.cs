@@ -92,7 +92,7 @@ public class EnemyBird : MonoBehaviour
 
     private IEnumerator Chase()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         transform.position = Vector2.MoveTowards(transform.position, chaseAim, speed * Time.deltaTime);
         yield return new WaitForSeconds(2);
         //isChasing = false;
