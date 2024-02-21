@@ -83,7 +83,7 @@ public class EnemyBird : MonoBehaviour
 
     private IEnumerator PlayerDetected()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         isChasing = true;
         yield return new WaitForSeconds(1);
         isChasing = false;

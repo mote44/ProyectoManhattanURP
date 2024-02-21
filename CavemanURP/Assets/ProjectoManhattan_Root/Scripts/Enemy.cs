@@ -87,22 +87,17 @@ public class Enemy : MonoBehaviour
     {
         enemyLife -= damage;
 
-        if (enemyLife <= 0) { EnemyDeath(); }
+        if (enemyLife <= 0) { StartCoroutine(EnemyDeath()); }
     }
 
-    private void EnemyDeath()
+    private IEnumerator EnemyDeath()
     {
-        StartCoroutine(Muerte());
-        
-    }
-
-
-    IEnumerator Muerte()
-    {
+        yield return new WaitForSeconds(0.2f);
         enemyAnim.SetTrigger("Death");
-        yield return new WaitForSeconds(1);
+        enemyLight.SetActive(false);
+        yield return new WaitForSeconds(0.7f);
         gameObject.SetActive(false);
-
+        yield return null;
     }
 
     IEnumerator IsAttacking()
