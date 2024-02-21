@@ -12,16 +12,18 @@ public class EnemyBird : MonoBehaviour
     [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
 
     [Header("Chase")]
-    float horizontalMovement;
     public Transform playerTransform;
     [SerializeField] float speed;
     [SerializeField] bool isChasing;
     [SerializeField] float chaseDistance;
-    bool isFacingLeft;
-    
+    [SerializeField] GameObject birdLight;
+    Vector2 chaseAim;
 
 
-
+    private void Awake()
+    {
+        birdLight = GameObject.Find("BirdLight");
+    }
 
 
     // Start is called before the first frame update
@@ -35,13 +37,15 @@ public class EnemyBird : MonoBehaviour
     {
         if (isChasing)
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+            StopCoroutine(PlayerDetected());
+            StartCoroutine(Chase());
         }
         else
         {
             if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
             {
-                isChasing = true;
+                chaseAim = playerTransform.position;
+                StartCoroutine(PlayerDetected());
             }
         }
 
@@ -64,14 +68,35 @@ public class EnemyBird : MonoBehaviour
     {
         birdLife -= damage;
 
-        if (birdLife <= 0) { EnemyDeath(); }
+        if (birdLife <= 0) { StartCoroutine(EnemyDeath()); }
     }
 
-    private void EnemyDeath()
+    private IEnumerator EnemyDeath()
     {
-        birdAnim.SetTrigger("Death_Enemy_2");
+        yield return new WaitForSeconds(0.2f);
+        birdAnim.SetTrigger("Enemy_2_Death");
+        birdLight.SetActive(false);
+        yield return new WaitForSeconds(0.7f);
+        gameObject.SetActive(false);
+        yield return null;
     }
 
+    private IEnumerator PlayerDetected()
+    {
+        yield return new WaitForSeconds(1);
+        isChasing = true;
+        yield return new WaitForSeconds(1);
+        isChasing = false;
+        yield return null;
+    }
 
+    private IEnumerator Chase()
+    {
+        yield return new WaitForSeconds(2);
+        transform.position = Vector2.MoveTowards(transform.position, chaseAim, speed * Time.deltaTime);
+        yield return new WaitForSeconds(2);
+        //isChasing = false;
+        yield return null;
+    }
 
 }
