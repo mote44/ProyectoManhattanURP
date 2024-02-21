@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         enemyHit.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f);
         enemyHit.SetActive(false);
         yield return null;
     }

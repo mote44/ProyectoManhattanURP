@@ -321,7 +321,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         damageReceived = 0;
         isOnPlatform = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         damageReceived = 1;
 
     }
@@ -397,6 +397,12 @@ public class PlayerControllerX : MonoBehaviour
 
         }
 
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
         if (collision.gameObject.CompareTag("EnemyHit"))
         {
 
@@ -407,10 +413,7 @@ public class PlayerControllerX : MonoBehaviour
             StartCoroutine(Intocable());
 
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (collision.gameObject.CompareTag("Trampa"))
         {
 

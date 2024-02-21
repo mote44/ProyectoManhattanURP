@@ -136,8 +136,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckSize: {x: 0, y: 0}
-  enemyHit: {fileID: 0}
-  enemyLight: {fileID: 0}
+  enemyHit: {fileID: 7792279089576276937}
+  enemyLight: {fileID: 3725439258825639238}
 --- !u!61 &5074006050699259257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.011100002, y: 0.13585, z: 0}
-    m_Extent: {x: 0.2506, y: 0.34254998, z: 0}
+    m_Center: {x: 0.0066500083, y: 0.14085001, z: 0}
+    m_Extent: {x: 0.24935001, y: 0.34115, z: 0}
   m_PointLightInnerAngle: 24.77
   m_PointLightOuterAngle: 39.19
   m_PointLightInnerRadius: 0
@@ -384,7 +384,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.74707115, y: -0.28783262}
