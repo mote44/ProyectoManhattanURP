@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         enemyRb = GetComponent<Rigidbody2D>();
         groundCheck = GameObject.Find("EnemyGroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.8f, .04f);
+        enemyHit.SetActive(false);
 
     }
 
@@ -104,7 +105,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         enemyHit.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         enemyHit.SetActive(false);
         yield return null;
     }

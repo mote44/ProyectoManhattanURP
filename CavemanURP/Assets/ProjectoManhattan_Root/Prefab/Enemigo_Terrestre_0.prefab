@@ -61,10 +61,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21171768, y: -0.26209623}
+  m_Offset: {x: 0.23562753, y: -0.26209623}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -75,7 +75,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4984354, y: 1.3313423}
+  m_Size: {x: 0.5462551, y: 1.3313423}
   m_EdgeRadius: 0
 --- !u!1 &2040506325004453733
 GameObject:
@@ -213,6 +213,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheckSize: {x: 0, y: 0}
+  enemyHit: {fileID: 0}
+  enemyLight: {fileID: 0}
 --- !u!61 &5074006050699259257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -245,7 +247,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.26343918, y: -0.22032222}
+  m_Offset: {x: -0.28017607, y: -0.22032225}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -256,7 +258,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2740295, y: 1.5593555}
+  m_Size: {x: 1.2405558, y: 1.5593555}
   m_EdgeRadius: 0
 --- !u!50 &2454556855142923058
 Rigidbody2D:
@@ -351,8 +353,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.005299993, y: 0.13784999, z: 0}
-    m_Extent: {x: 0.2545, y: 0.34645, z: 0}
+    m_Center: {x: -0.004900001, y: 0.13729998, z: 0}
+    m_Extent: {x: 0.24849999, y: 0.3393, z: 0}
   m_PointLightInnerAngle: 24.77
   m_PointLightOuterAngle: 39.19
   m_PointLightInnerRadius: 0
