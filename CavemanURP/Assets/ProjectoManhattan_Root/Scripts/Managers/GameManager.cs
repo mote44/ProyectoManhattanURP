@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int superLifes;
     public int MegaLifes;
     public int pickupPoints;
+    public bool gameCompleted;
     
 
 
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this; //Decirle a la variable base de datos que tienes ESTOS DATOS
         DontDestroyOnLoad(this);
-        
+        gameCompleted = false;
     }
 
 
@@ -70,8 +71,13 @@ public class GameManager : MonoBehaviour
     public void Pickup()
     {
         pickupPoints +=1;
-        Debug.Log("pickups " + pickupPoints);
+        //Debug.Log("pickups " + pickupPoints);
     }
 
-    
+    public void YouWin()
+    {
+        gameCompleted = true;
+        Debug.Log("YOU WINNNNN");
+        
+    }
 }

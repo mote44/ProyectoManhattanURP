@@ -10,7 +10,8 @@ public class ToNextLevel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(2);
+            //SceneManager.LoadScene(2);
+            GameManager.Instance.YouWin();
             
         }
     }
