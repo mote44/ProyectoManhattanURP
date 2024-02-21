@@ -21,6 +21,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject groundCheck;
     [SerializeField] LayerMask groundLayer; //Sirve para decirle al personaje cuál es la capa suelo
     [SerializeField] Vector2 groundCheckSize;
+    [SerializeField] GameObject enemyHit;
+    [SerializeField] GameObject enemyLight;
+
+    private void Awake()
+    {
+        enemyHit = GameObject.Find("EnemyHit"); //Encuentra el object con el collider de ataque
+        enemyLight = GameObject.Find("EnemyLight");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +77,7 @@ public class Enemy : MonoBehaviour
             if (collision.gameObject.CompareTag("Player"))
             {
                 enemyAnim.SetTrigger("Attack");
+                StartCoroutine(IsAttacking());
             }
         }
             
@@ -94,5 +103,14 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
 
+    }
+
+    IEnumerator IsAttacking()
+    {
+        yield return new WaitForSeconds(0.2f);
+        enemyHit.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        enemyHit.SetActive(false);
+        yield return null;
     }
 }
