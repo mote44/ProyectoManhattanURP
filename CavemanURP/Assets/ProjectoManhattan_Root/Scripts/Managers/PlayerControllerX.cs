@@ -7,7 +7,8 @@ using UnityEngine.Rendering.Universal;
 public class PlayerControllerX : MonoBehaviour
 {
     //Variables de referencia
-    
+    [SerializeField] AudioClip audioClip;
+    AudioSource audioSour;
     Rigidbody2D playerRb;
     Animator anim;
     [SerializeField] Light2D torch;
@@ -74,7 +75,7 @@ public class PlayerControllerX : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+        audioSour = GetComponent<AudioSource>();
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.78f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
@@ -183,6 +184,17 @@ public class PlayerControllerX : MonoBehaviour
         //Referenciar el INPUT
         horizontalInput = Input.GetAxis("Horizontal"); // Rellenamos la variable del input horizontal
         playerRb.velocity = new Vector2(horizontalInput * speed / playerRb.gravityScale, playerRb.velocity.y); //El valor Y representa el valor que tenga la posY del player en cada momento, no queremos modificarla
+
+        if ((playerRb.velocity.x > 0.1f || playerRb.velocity.x < -0.1f) && isGrounded)
+        { 
+            audioSour.mute = false;
+            
+        }
+        else
+        {
+            audioSour.mute = true;
+            //audioSour.PlayOneShot(audioClip);
+        }
         
        
     }

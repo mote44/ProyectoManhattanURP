@@ -43,7 +43,7 @@ Transform:
   - {fileID: 4181714379564725527}
   - {fileID: 3415046009575478259}
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4574196602981526015
 SpriteRenderer:
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86be380774f28d84983b5884b6414ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 47fb3dbbbdd91e9489d43621da8c1c49, type: 3}
   torch: {fileID: 3526182089425823760}
   snowParticles: {fileID: 7652970237226943002}
   speed: 18
@@ -249,7 +250,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 47fb3dbbbdd91e9489d43621da8c1c49, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.362
   m_Pitch: 1
   Loop: 1
   Mute: 0
