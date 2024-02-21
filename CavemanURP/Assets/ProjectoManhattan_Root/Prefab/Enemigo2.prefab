@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9062162805380430571}
   m_Layer: 0
   m_Name: Enemigo2
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,9 +142,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2841487, y: -0.030842662}
+  m_Offset: {x: -0.20543242, y: 0.04595822}
   serializedVersion: 2
-  m_Radius: 0.6499773
+  m_Radius: 0.64806193
 --- !u!114 &9062162805380430571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 32793971205387442}
   m_Layer: 0
   m_Name: BirdHit
-  m_TagString: EnemyHit
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +230,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5488354, y: -0.015564308}
+  m_Offset: {x: -0.5409354, y: -0.015564308}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -241,7 +241,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39234352, y: 0.31341764}
+  m_Size: {x: 0.37654328, y: 0.31341764}
   m_EdgeRadius: 0
 --- !u!1 &4640031666779647928
 GameObject:
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0010499954, y: 0.10775001, z: 0}
-    m_Extent: {x: 0.46855, y: 0.43085003, z: 0}
+    m_Center: {x: -0.010049999, y: 0.11344999, z: 0}
+    m_Extent: {x: 0.47565, y: 0.43825, z: 0}
   m_PointLightInnerAngle: 65.41
   m_PointLightOuterAngle: 100.55
   m_PointLightInnerRadius: 0.23937695

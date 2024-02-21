@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7471513610140216382}
   m_Layer: 0
   m_Name: EnemyHit
-  m_TagString: EnemyHit
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2454556855142923058}
   m_Layer: 0
   m_Name: Enemigo_Terrestre_0
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,7 +209,6 @@ MonoBehaviour:
   enemyLife: 1
   isGrounded: 0
   groundCheck: {fileID: 4964844823705052018}
-  hitCheck: {fileID: 40990531516927248}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -352,8 +351,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.005750008, y: 0.13674998, z: 0}
-    m_Extent: {x: 0.25095, y: 0.34305, z: 0}
+    m_Center: {x: 0.00009998679, y: 0.1407, z: 0}
+    m_Extent: {x: 0.2527, y: 0.34649998, z: 0}
   m_PointLightInnerAngle: 24.77
   m_PointLightOuterAngle: 39.19
   m_PointLightInnerRadius: 0
