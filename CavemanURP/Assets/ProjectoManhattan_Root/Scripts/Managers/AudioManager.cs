@@ -35,6 +35,12 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
+    public void PauseMusic(int musicIndex)
+    {
+        musicSource.clip = musicList[musicIndex];
+        musicSource.Pause();
+    }
+
     public void PlaySFX(int sfxIndex)
     {
         sfxSource.PlayOneShot(sfxList[sfxIndex]);

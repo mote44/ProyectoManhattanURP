@@ -82,9 +82,16 @@ public class Enemy : MonoBehaviour
 
     private void EnemyDeath()
     {
-        enemyAnim.SetTrigger("Death");
-        
+        StartCoroutine(Muerte());
         
     }
 
+
+    IEnumerator Muerte()
+    {
+        enemyAnim.SetTrigger("Death");
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
+
+    }
 }

@@ -24,15 +24,21 @@ public class GameManager : MonoBehaviour
     //Todas las variables han de ser PÚBLICAS
     public int points;
     public int winPoints;
-    public int lifePoints;
+    public int superLifes;
+    public int MegaLifes;
     public int pickupPoints;
+    
+
 
     private void Awake()
     {
         instance = this; //Decirle a la variable base de datos que tienes ESTOS DATOS
         DontDestroyOnLoad(this);
+        
     }
 
+
+    
     //Se pueden declarar acciones públicas que pueden ser llamadas por cualquier objeto
     public void PointsUp(int pointsToAdd)
     {
@@ -48,13 +54,16 @@ public class GameManager : MonoBehaviour
 
     public void LifeDown(int lifePoints)
     {
-        lifePoints -= 1;
+        superLifes = lifePoints;
         
+        
+        Debug.Log("super " + superLifes);
     }
 
     public void LifeUp(int lifePoints)
     {
         lifePoints = 3;
+       
 
     }
 
@@ -63,4 +72,6 @@ public class GameManager : MonoBehaviour
         pickupPoints +=1;
         Debug.Log("pickups " + pickupPoints);
     }
+
+    
 }

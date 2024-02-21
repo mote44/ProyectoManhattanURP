@@ -19,6 +19,8 @@ public class PlayerControllerX : MonoBehaviour
     bool isFacingRight = true;
 
     public int lifeCounter;
+    public int superLifeCounter;
+    bool stop = false;
     private Vector3 respawnPos;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isOnPlatform;
@@ -70,9 +72,10 @@ public class PlayerControllerX : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
-        groundCheckSize = new Vector2(.8f, .04f);
+        groundCheckSize = new Vector2(.78f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
         damageReceived = 1;
+        superLifeCounter = 3;
         
         //AudioManager.Instance.PlaySFX(0);     //Lanzar audios
 
@@ -107,6 +110,7 @@ public class PlayerControllerX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         torchInitPos = new Vector2(transform.position.x - .5f,transform.position.y + 1.1f);
 
         if (isDashing)
@@ -139,7 +143,12 @@ public class PlayerControllerX : MonoBehaviour
         AirHit();
         
 
-        if (lifeCounter <= 0) { StartCoroutine(Death()); }
+        if (lifeCounter <= 0)
+        {
+            PlayerDead();
+
+
+        }
 
         
        
@@ -158,8 +167,12 @@ public class PlayerControllerX : MonoBehaviour
             {
                 Flip();
             }
-        }  
+        } 
+        
+        
     }
+
+    
 
     void Movement()
     {
@@ -243,17 +256,45 @@ public class PlayerControllerX : MonoBehaviour
         canDash = true;
     }
 
+
+    void Respawn()
+    {
+        transform.position = respawnPos;
+        lifeCounter = 3;
+        anim.SetInteger("Life", 3);
+        torch.intensity = 1f;
+        stop = false;
+    }
+    
+    void PlayerDead()
+    {
+
+
+        if (!stop)
+        {
+            StartCoroutine(Death());
+            superLifeCounter -= 1;
+            GameManager.Instance.LifeDown(superLifeCounter);
+            stop = true;
+        }
+
+
+    }
     private IEnumerator Death()
     {
+        
         anim.SetInteger("Life", 0);
         speed = 0f;
         yield return new WaitForSeconds(0.63f);
         anim.SetTrigger("Respawn");
         speed = 18f;
-        transform.position = respawnPos;
-        lifeCounter = 3;
-        anim.SetInteger("Life", 3);
         torch.intensity = 0f;
+
+        Respawn();
+        
+        
+        
+
     }
 
 
@@ -290,6 +331,7 @@ public class PlayerControllerX : MonoBehaviour
                 }
             }
 
+            AudioManager.Instance.PlaySFX(0);
             AudioManager.Instance.PlaySFX(2);
             StartCoroutine(LightHitPos());
 
@@ -308,6 +350,12 @@ public class PlayerControllerX : MonoBehaviour
         }
     }
 
+    private void Hurt()
+    {
+        anim.SetTrigger("Hurt");
+        
+    }
+
     //Gestión del daño recibido
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -319,6 +367,17 @@ public class PlayerControllerX : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Trampa"))
+        {
+
+            Hurt();
+            lifeCounter = lifeCounter - damageReceived;
+            Debug.Log(lifeCounter);
+            torch.intensity = lifeCounter - damageReceived;
+            StartCoroutine(Intocable());
+
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
         {
 
             anim.SetTrigger("Hurt");
