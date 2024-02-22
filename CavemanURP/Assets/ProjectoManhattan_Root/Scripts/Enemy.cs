@@ -25,11 +25,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] GameObject enemyHit;
     [SerializeField] GameObject enemyLight;
+    [SerializeField] AudioSource enemySound;
 
     private void Awake()
     {
         enemyHit = GameObject.Find("EnemyHit"); //Encuentra el object con el collider de ataque
         enemyLight = GameObject.Find("EnemyLight");
+        enemySound = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -100,6 +102,7 @@ public class Enemy : MonoBehaviour
         enemyAnim.SetTrigger("Death");
         enemyLight.SetActive(false);
         audioSour.Pause();
+        enemySound.Stop();
         //audioSour.mute = true;
         yield return new WaitForSeconds(0.7f);
         gameObject.SetActive(false);
