@@ -74,6 +74,7 @@ public class UILevel : MonoBehaviour
     }
     public void GameCompleted()
     {
-       winPanel.SetActive(true);
+        winPanel.SetActive(true);
+        
     }
 }

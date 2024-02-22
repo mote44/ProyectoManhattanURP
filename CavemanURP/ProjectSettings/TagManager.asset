@@ -12,6 +12,7 @@ TagManager:
   - EndOfIce
   - Pickup
   - EnemyHit
+  - Muerte
   layers:
   - Default
   - TransparentFX

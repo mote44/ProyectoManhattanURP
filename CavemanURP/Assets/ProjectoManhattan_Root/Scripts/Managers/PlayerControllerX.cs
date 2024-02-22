@@ -397,11 +397,17 @@ public class PlayerControllerX : MonoBehaviour
 
         }
 
+       
         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        if (collision.gameObject.CompareTag("Muerte"))
+        {
+            lifeCounter = 0;
+        }
 
         if (collision.gameObject.CompareTag("EnemyHit"))
         {

@@ -866,8 +866,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.13740015, y: -5.07995, z: 0}
-    m_Extent: {x: 15.072201, y: 5.54225, z: 0}
+    m_Center: {x: 0.13115025, y: -5.0742497, z: 0}
+    m_Extent: {x: 15.06425, y: 5.53575, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 164be978e9a1c0e478addfbef6844ee3, type: 3}
   - {fileID: 8300000, guid: 04871f1f736a59048bfdac59ded4270b, type: 3}
   - {fileID: 8300000, guid: 120314b4780bf474790abeb5d1f38400, type: 3}
+  - {fileID: 8300000, guid: d558e3cdeff5f054a89bfe4914543766, type: 3}
 --- !u!1 &396019711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optPanel: {fileID: 1653039132}
+  playBtn: {fileID: 2028073531}
+  exitBtn: {fileID: 1433974522}
+  optBtn: {fileID: 1314526788}
 --- !u!4 &406955726
 Transform:
   m_ObjectHideFlags: 0
@@ -4655,7 +4659,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.1509434, g: 0.1488074, b: 0.1488074, a: 0.33333334}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4682,6 +4686,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 382323688}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
