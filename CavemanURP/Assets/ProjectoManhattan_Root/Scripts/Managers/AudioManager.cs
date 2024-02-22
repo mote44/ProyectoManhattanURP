@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        PlayMusic(4);
+        musicSource.volume = 0.5f;
     }
 
     public void PlayMusic(int musicIndex)

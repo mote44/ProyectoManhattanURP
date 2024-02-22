@@ -139,6 +139,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0, y: 0}
   enemyHit: {fileID: 7792279089576276937}
   enemyLight: {fileID: 3725439258825639238}
+  enemySound: {fileID: 0}
 --- !u!61 &5074006050699259257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 5.88
+  MaxDistance: 6.12
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -251,8 +252,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.21004134
-      value: 0.58033466
+      time: 0.30314285
+      value: 0.67709064
       inSlope: -2.582277
       outSlope: -2.582277
       tangentMode: 0
@@ -260,8 +261,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.18469122
     - serializedVersion: 3
-      time: 0.5726302
-      value: 0.18026888
+      time: 0.6622909
+      value: 0.19554293
       inSlope: -0.5444167
       outSlope: -0.5444167
       tangentMode: 0
@@ -391,8 +392,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.002849996, y: 0.13785, z: 0}
-    m_Extent: {x: 0.25665, y: 0.34565002, z: 0}
+    m_Center: {x: 0.0033000037, y: 0.1372, z: 0}
+    m_Extent: {x: 0.2496, y: 0.3411, z: 0}
   m_PointLightInnerAngle: 24.77
   m_PointLightOuterAngle: 39.19
   m_PointLightInnerRadius: 0
