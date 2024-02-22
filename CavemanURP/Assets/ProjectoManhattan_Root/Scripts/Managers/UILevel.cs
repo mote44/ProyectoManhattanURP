@@ -71,6 +71,8 @@ public class UILevel : MonoBehaviour
         AudioManager.Instance.PlaySFX(13);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene(0);
+        
+
     }
     public void GameCompleted()
     {

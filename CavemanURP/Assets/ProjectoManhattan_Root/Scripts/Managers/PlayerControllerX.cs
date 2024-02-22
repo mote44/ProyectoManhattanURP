@@ -347,11 +347,13 @@ public class PlayerControllerX : MonoBehaviour
                 if (col.CompareTag("Enemy"))
                 {
                     col.transform.GetComponent<Enemy>().DamageReceive(hitDamage);
+                    AudioManager.Instance.PlaySFX(2);
                 }
+                else { AudioManager.Instance.PlaySFX(16); }
             }
 
             AudioManager.Instance.PlaySFX(0);
-            AudioManager.Instance.PlaySFX(2);
+            
             StartCoroutine(LightHitPos());
 
         }
@@ -406,6 +408,7 @@ public class PlayerControllerX : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Muerte"))
         {
+            AudioManager.Instance.PlaySFX(17);
             lifeCounter = 0;
         }
 

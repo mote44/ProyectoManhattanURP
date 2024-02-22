@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     [Header("Enemy References")]
     [SerializeField] private float enemyLife;
 
+
+    AudioSource audioSour;
     Rigidbody2D enemyRb;
     private Animator enemyAnim;
 
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
 
         enemyAnim = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody2D>();
+        audioSour = GetComponent<AudioSource>();
         groundCheck = GameObject.Find("EnemyGroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.8f, .04f);
         enemyHit.SetActive(false);
@@ -71,7 +74,7 @@ public class Enemy : MonoBehaviour
        
     }
 
-    private void OnCollisionEnter2D(UnityEngine.Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (enemyLife > 0)
         {
@@ -96,13 +99,17 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         enemyAnim.SetTrigger("Death");
         enemyLight.SetActive(false);
+        audioSour.Pause();
+        //audioSour.mute = true;
         yield return new WaitForSeconds(0.7f);
         gameObject.SetActive(false);
         yield return null;
+        
     }
 
     IEnumerator IsAttacking()
     {
+        
         yield return new WaitForSeconds(0.2f);
         enemyHit.SetActive(true);
         yield return new WaitForSeconds(0.05f);
