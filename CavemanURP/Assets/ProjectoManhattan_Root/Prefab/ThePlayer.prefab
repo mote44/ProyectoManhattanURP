@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1206253434946531490}
   - component: {fileID: 5201088975374841365}
   - component: {fileID: 7667714131774709639}
+  - component: {fileID: 5057248946161357264}
   m_Layer: 8
   m_Name: ThePlayer
   m_TagString: Player
@@ -334,6 +335,80 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5057248946161357264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633205504492944915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5abee26596d8dc54dabfc9c1940fbc38, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1b47106-3941-4833-83c6-8133f13e73aa
+    m_ActionName: Player1/Movement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a8dda9ab-fb28-4230-b646-c3a8cf771eb4
+    m_ActionName: Player1/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5bf4d240-1a4d-4943-a26b-b88f8a5fc46c
+    m_ActionName: Player1/Attack[/Keyboard/ctrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09389704-d731-4d99-9991-71764ef6c15a
+    m_ActionName: Player1/Dash[/Keyboard/alt]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c5bde29-7f23-499f-8580-a345aebb9436
+    m_ActionName: Player2/Movement[/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5729964864424150667}
+        m_TargetAssemblyTypeName: PlayerControllerX, Assembly-CSharp
+        m_MethodName: JumpNew
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9ae64513-6d02-4d65-9f53-2a756c0eff2e
+    m_ActionName: Player2/Jump[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b40d05b-cca3-484a-a6a7-477b98b2462b
+    m_ActionName: Player2/Attack[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 124feb8a-8090-4697-86a8-e507f6a43889
+    m_ActionName: Player2/Dash[/XInputControllerWindows/rightTrigger]
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player2
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3381954706833162135
 GameObject:
   m_ObjectHideFlags: 0

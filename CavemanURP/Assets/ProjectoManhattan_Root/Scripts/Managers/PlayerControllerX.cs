@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class PlayerControllerX : MonoBehaviour
 {
@@ -10,10 +11,11 @@ public class PlayerControllerX : MonoBehaviour
     [SerializeField] AudioClip audioClip;
     AudioSource audioSour;
     Rigidbody2D playerRb;
+    PlayerInput playerInput;
     Animator anim;
     [SerializeField] Light2D torch;
     [SerializeField] private ParticleSystem snowParticles;
-    float horizontalInput;
+    Vector2 horizontalInput;
 
     [Header("Movement & Jump")]
     public float speed;
@@ -76,6 +78,7 @@ public class PlayerControllerX : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         audioSour = GetComponent<AudioSource>();
+        playerInput = GetComponent<PlayerInput>();
         groundCheck = GameObject.Find("GroundCheck");//Encuentra el object que hemos creado como hijo de Player
         groundCheckSize = new Vector2(.78f, .04f);
         wallCheckSize = new Vector2(.85f, .2f);
@@ -116,6 +119,9 @@ public class PlayerControllerX : MonoBehaviour
     void Update()
     {
         
+       //Lectura de movimiento constante
+       horizontalInput = playerInput.actions["Movement"].ReadValue<Vector2>();
+        
         torchInitPos = new Vector2(transform.position.x - .5f,transform.position.y + 1.1f);
 
         if (isDashing)
@@ -139,7 +145,7 @@ public class PlayerControllerX : MonoBehaviour
         isOnWall = Physics2D.OverlapBox(wallCheck.transform.position, wallCheckSize, 0f, groundLayer); ;  //Physics2D dibuja figuras geometricas invisibles
         
         anim.SetBool("Jump", (!isGrounded && !isOnPlatform));
-        anim.SetBool("Run", (isGrounded || isOnPlatform) && horizontalInput!=0);
+        anim.SetBool("Run", (isGrounded || isOnPlatform) && horizontalInput.x !=0);
         anim.SetInteger("Life", lifeCounter);
 
         Movement(); // LAS FÍSICAS DEBERÍAN IR EN EL FIXED UPDATE
@@ -158,14 +164,14 @@ public class PlayerControllerX : MonoBehaviour
         
        
         
-        if (horizontalInput > 0) //Si 
+        if (horizontalInput.x > 0) //Si 
         {
             if (!isFacingRight)
             {
                 Flip();
             }
         }
-        if (horizontalInput < 0)
+        if (horizontalInput.x < 0)
         {
             if (isFacingRight)
 
@@ -182,8 +188,8 @@ public class PlayerControllerX : MonoBehaviour
     void Movement()
     {
         //Referenciar el INPUT
-        horizontalInput = Input.GetAxis("Horizontal"); // Rellenamos la variable del input horizontal
-        playerRb.velocity = new Vector2(horizontalInput * speed / playerRb.gravityScale, playerRb.velocity.y); //El valor Y representa el valor que tenga la posY del player en cada momento, no queremos modificarla
+        //horizontalInput = Input.GetAxis("Horizontal"); // Rellenamos la variable del input horizontal
+        playerRb.velocity = new Vector2(horizontalInput.x * speed / playerRb.gravityScale, playerRb.velocity.y); //El valor Y representa el valor que tenga la posY del player en cada momento, no queremos modificarla
 
         if ((playerRb.velocity.x > 0.1f || playerRb.velocity.x < -0.1f) && isGrounded)
         { 
@@ -236,6 +242,21 @@ public class PlayerControllerX : MonoBehaviour
         }
 
 
+    }
+
+    public void JumpNew(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (isGrounded || isOnPlatform)
+            {
+                playerRb.mass = 1f;
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse); //Definimos el tipo de fuerza (Impulse para salto) después de definir que el salto es moverse en vertical * jumpforce
+                if (!isOnPlatform) snowParticles.Play();
+                AudioManager.Instance.PlaySFX(1);
+                AudioManager.Instance.PlaySFX(9);
+            }
+        }
     }
 
 

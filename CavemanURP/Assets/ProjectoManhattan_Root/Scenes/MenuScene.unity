@@ -950,8 +950,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.13565016, y: -5.0707, z: 0}
-    m_Extent: {x: 15.06665, y: 5.5426, z: 0}
+    m_Center: {x: 0.12844992, y: -5.0686502, z: 0}
+    m_Extent: {x: 15.065849, y: 5.54325, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2525,6 +2525,10 @@ PrefabInstance:
     - target: {fileID: 1633205504492944915, guid: 0abf8db111c2d164ba91358728c29931, type: 3}
       propertyPath: m_Name
       value: ThePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057248946161357264, guid: 0abf8db111c2d164ba91358728c29931, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5729964864424150667, guid: 0abf8db111c2d164ba91358728c29931, type: 3}
       propertyPath: superLifeCounter
@@ -4893,8 +4897,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.5828998, y: -0.72735, z: 0}
-    m_Extent: {x: 4.7504997, y: 1.92665, z: 0}
+    m_Center: {x: -0.58299994, y: -0.72405005, z: 0}
+    m_Extent: {x: 4.7492, y: 1.92995, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
